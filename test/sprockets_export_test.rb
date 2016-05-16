@@ -23,7 +23,7 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     MyPackage.b = "b"
   }).call(this);
 
-  if (typeof module === "object" && module.exports && false) {
+  if (typeof module === "object" && module.exports) {
     module.exports = MyPackage;
   } else if (typeof define === "function" && define.amd) {
     define(MyPackage);

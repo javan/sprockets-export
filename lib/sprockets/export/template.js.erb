@@ -9,7 +9,7 @@
     <%= indent(@body, 4) %>
   }).call(this);
 
-  if (typeof module === "object" && module.exports && false) {
+  if (typeof module === "object" && module.exports) {
     module.exports = <%= @namespace %>;
   } else if (typeof define === "function" && define.amd) {
     define(<%= @namespace %>);
