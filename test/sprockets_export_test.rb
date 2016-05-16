@@ -6,7 +6,7 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     @env.append_path File.join(__dir__, "fixtures")
   end
 
-  test "javascript asset with export_self directive" do
+  test "javascript asset with export directive" do
     assert_equal <<-JS,  @env["package.js"].to_s
 (function() {
   (function() {
