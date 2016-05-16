@@ -3,7 +3,7 @@
     <%= indent(@export, 4 )%>
   }).call(this);
 
-  eval("var <%= @namespace %> = this.<%= @namespace %>");
+  var <%= @namespace %> = this.<%= @namespace %>;
 
   (function() {
     <%= indent(@body, 4) %>

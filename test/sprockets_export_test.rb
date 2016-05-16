@@ -15,7 +15,7 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     }
   }).call(this);
 
-  eval("var MyPackage = this.MyPackage");
+  var MyPackage = this.MyPackage;
 
   (function() {
     MyPackage.a = "a"
