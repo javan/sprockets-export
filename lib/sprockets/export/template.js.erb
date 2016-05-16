@@ -1,0 +1,17 @@
+(function() {
+  (function() {
+    <%= indent(@export, 4 )%>
+  }).call(this);
+
+  eval("var <%= @namespace %> = this.<%= @namespace %>");
+
+  (function() {
+    <%= indent(@body, 4) %>
+  }).call(this);
+
+  if (typeof module === "object" && module.exports && false) {
+    module.exports = <%= @namespace %>;
+  } else if (typeof define === "function" && define.amd) {
+    define(<%= @namespace %>);
+  }
+}).call(this);
