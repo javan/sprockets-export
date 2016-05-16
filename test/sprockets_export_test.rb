@@ -31,4 +31,8 @@ class BundleProcessorTest < Sprockets::Export::TestCase
 }).call(this);
     JS
   end
+
+  test "non-javascript assets ignore export directive" do
+    assert_equal "body { display: none; }\n\n\n\n", @env["styles.css"].to_s
+  end
 end
