@@ -6,6 +6,7 @@ module Sprockets::Export::BundleProcessor
   PATTERN = /(.*)\/\* !START EXPORT (.*) \*\/(.*)\/\* !END EXPORT \*\/(.*)/m
 
   def call(input)
+    Sprockets::Export::Namespace.reset
     data = input[:data]
 
     if data =~ PATTERN

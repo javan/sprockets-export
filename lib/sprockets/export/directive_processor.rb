@@ -1,8 +1,7 @@
 class Sprockets::DirectiveProcessor
-  def process_export_self_directive
+  def process_export_directive(namespace)
     if @content_type == "application/javascript"
-      process_stub_directive("sprockets/export_stub")
-      process_require_self_directive
+      Sprockets::Export::Namespace.save(@environment, @filename, namespace)
     end
   end
 end

@@ -1,4 +1,5 @@
-//= export_self
+//= export MyPackage
+//= require_self
 //= require_tree ./helpers
 
 this.MyPackage = {
