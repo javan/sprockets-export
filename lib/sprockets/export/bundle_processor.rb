@@ -19,15 +19,19 @@ module Sprockets::Export::BundleProcessor
   private
     def extract_template_data(js)
       _, head, namespace, export, tail = *js.match(PATTERN)
-      export.strip!
 
-      body = [head, tail]
+      export.strip!
+      body = format_body(head, tail)
+
+      { namespace: namespace, export: export, body: body }
+    end
+
+    def format_body(head, tail)
+      [head, tail]
         .reject { |s| s == "" }
         .map(&:strip)
         .join("\n")
         .gsub(/\A;$/, "")
         .strip
-
-      { namespace: namespace, export: export, body: body }
     end
 end
