@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Javan Makhmali"]
   spec.email         = ["javan@javan.us"]
 
-  spec.summary       = %q{TODO}
-  spec.description   = %q{TODO}
+  spec.summary       = %q{Sprockets Export}
+  spec.description   = %q{A Sprockets directive for hassle-free UMD-style JavaScript module definitions.}
   spec.homepage      = "https://github.com/javan/sprockets-export"
   spec.license       = "MIT"
 
