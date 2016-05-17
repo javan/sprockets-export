@@ -3,7 +3,7 @@ require "test_helper"
 class BundleProcessorTest < Sprockets::Export::TestCase
   def setup
     @env = Sprockets::Environment.new(".")
-    @env.append_path File.join(__dir__, "fixtures")
+    @env.append_path File.expand_path("../fixtures", __FILE__)
   end
 
   test "javascript asset with export directive" do

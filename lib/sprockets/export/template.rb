@@ -1,7 +1,9 @@
 require "erb"
 
 class Sprockets::Export::Template
-  CONTENT = Pathname.new(__dir__).join("template.js.erb").read
+  def self.content
+    @content ||= Sprockets::Export.lib_path.join("sprockets/export/template.js.erb").read
+  end
 
   def initialize(data = {})
     data.each do |key, value|
@@ -10,7 +12,7 @@ class Sprockets::Export::Template
   end
 
   def render
-    ERB.new(CONTENT).result(binding).strip + "\n"
+    ERB.new(self.class.content).result(binding).strip + "\n"
   end
 
   private
