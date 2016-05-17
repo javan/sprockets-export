@@ -20,18 +20,13 @@ module Sprockets::Export::BundleProcessor
     def extract_template_data(js)
       _, head, namespace, export, tail = *js.match(PATTERN)
 
-      export.strip!
-      body = format_body(head, tail)
-
-      { namespace: namespace, export: export, body: body }
+      { namespace: namespace,
+        export: format(export),
+        head: format(head),
+        tail: format(tail) }
     end
 
-    def format_body(head, tail)
-      [head, tail]
-        .reject { |s| s == "" }
-        .map(&:strip)
-        .join("\n")
-        .gsub(/\A;$/, "")
-        .strip
+    def format(part)
+      part.strip.gsub(/\A;$/, "").strip
     end
 end

@@ -32,6 +32,31 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     JS
   end
 
+  test "javascript asset with data before export directive" do
+    assert_equal <<-JS,  @env["head-export-tail.js"].to_s
+head();
+
+(function() {
+  (function() {
+    this.Foo = function() {};
+  }).call(this);
+
+  var Foo = this.Foo;
+
+  (function() {
+    new Foo();
+    tail();
+  }).call(this);
+
+  if (typeof module === "object" && module.exports) {
+    module.exports = Foo;
+  } else if (typeof define === "function" && define.amd) {
+    define(Foo);
+  }
+}).call(this);
+    JS
+  end
+
   test "non-javascript assets ignore export directive" do
     assert_equal "body { display: none; }\n\n\n\n", @env["styles.css"].to_s
   end

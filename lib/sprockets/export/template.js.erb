@@ -1,3 +1,5 @@
+<%= @head %>
+
 (function() {
   (function() {
     <%= indent(@export, 4 )%>
@@ -6,7 +8,7 @@
   var <%= @namespace %> = this.<%= @namespace %>;
 
   (function() {
-    <%= indent(@body, 4) %>
+    <%= indent(@tail, 4) %>
   }).call(this);
 
   if (typeof module === "object" && module.exports) {
