@@ -17,7 +17,7 @@ class Sprockets::Export::Template
 
   private
     def indent(string, amount)
-      lines = string.lines
+      lines = string.lines.to_a
       result = lines.shift
       lines.each do |line|
         result << line.gsub(/^(?!$)/, " " * amount)
