@@ -1,7 +1,7 @@
 require "pathname"
 
 require "sprockets/export/version"
-require "sprockets/export/namespace"
+require "sprockets/export/store"
 require "sprockets/export/directive_processor"
 require "sprockets/export/metadata_injector"
 require "sprockets/export/bundle_processor"

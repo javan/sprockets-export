@@ -1,11 +1,12 @@
 <%= @head %>
 
 (function() {
+<%= "  var context = {};\n" if @flags.noglobal -%>
   (function() {
     <%= indent(@export, 4 )%>
-  }).call(this);
+  }).call(<%= @flags.noglobal ? "context" : "this" %>);
 
-  var <%= @namespace %> = this.<%= @namespace %>;
+  var <%= @namespace %> = <%= @flags.noglobal  ? "context" : "this" %>.<%= @namespace %>;
 
   (function() {
     <%= indent(@tail, 4) %>

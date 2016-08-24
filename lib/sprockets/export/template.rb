@@ -12,7 +12,7 @@ class Sprockets::Export::Template
   end
 
   def render
-    ERB.new(self.class.content).result(binding).strip + "\n"
+    ERB.new(self.class.content, nil, "-").result(binding).strip + "\n"
   end
 
   private

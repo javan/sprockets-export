@@ -1,12 +1,13 @@
 require "sprockets/export/template"
+require "ostruct"
 
 module Sprockets::Export::BundleProcessor
   extend self
 
-  PATTERN = /(.*)\/\* !START EXPORT (.*) \*\/(.*)\/\* !END EXPORT \*\/(.*)/m
+  PATTERN = /(.*)\/\* !START EXPORT (\S*)\s*(\S*) \*\/(.*)\/\* !END EXPORT \*\/(.*)/m
 
   def call(input)
-    Sprockets::Export::Namespace.reset
+    Sprockets::Export::Store.reset
     data = input[:data]
 
     if data =~ PATTERN
@@ -18,15 +19,24 @@ module Sprockets::Export::BundleProcessor
 
   private
     def extract_template_data(js)
-      _, head, namespace, export, tail = *js.match(PATTERN)
+      _, head, namespace, flags, export, tail = *js.match(PATTERN)
 
       { namespace: namespace,
+        flags: create_flags(flags),
         export: format(export),
         head: format(head),
         tail: format(tail) }
     end
 
     def format(part)
-      part.strip.gsub(/\A;$/, "").strip
+      part.strip.gsub(/\A\s*;\n*|\n;\s*\z/, "").strip
+    end
+
+    def create_flags(string = "")
+      OpenStruct.new.tap do |flags|
+        string.split.each do |flag|
+          flags[flag] = true
+        end
+      end
     end
 end

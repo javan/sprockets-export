@@ -32,6 +32,33 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     JS
   end
 
+  test "javascript asset with export and noglobal directive" do
+    assert_equal <<-JS,  @env["package-noglobal.js"].to_s
+(function() {
+  var context = {};
+  (function() {
+    this.MyPackage = {
+      version: 1
+    }
+  }).call(context);
+
+  var MyPackage = context.MyPackage;
+
+  (function() {
+    MyPackage.a = "a"
+    ;
+    MyPackage.b = "b"
+  }).call(this);
+
+  if (typeof module === "object" && module.exports) {
+    module.exports = MyPackage;
+  } else if (typeof define === "function" && define.amd) {
+    define(MyPackage);
+  }
+}).call(this);
+    JS
+  end
+
   test "javascript asset with data before export directive" do
     assert_equal <<-JS,  @env["head-export-tail.js"].to_s
 head();

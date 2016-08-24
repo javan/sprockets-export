@@ -1,12 +1,12 @@
-module Sprockets::Export::Namespace
+module Sprockets::Export::Store
   extend self
 
-  def save(environment, filename, namespace)
+  def set(environment, filename, data)
     mapping[environment] ||= {}
-    mapping[environment][filename] = namespace
+    mapping[environment][filename] = data
   end
 
-  def find(environment, filename)
+  def get(environment, filename)
     if mapping[environment]
       mapping[environment][filename]
     end

@@ -1,0 +1,1 @@
+MyPackage.b = "b"
