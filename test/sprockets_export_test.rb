@@ -9,13 +9,15 @@ class BundleProcessorTest < Sprockets::Export::TestCase
   test "javascript asset with export directive" do
     assert_equal <<-JS,  @env["package.js"].to_s
 (function() {
+  var context = this;
+
   (function() {
     this.MyPackage = {
       version: 1
     }
-  }).call(this);
+  }).call(context);
 
-  var MyPackage = this.MyPackage;
+  var MyPackage = context.MyPackage;
 
   (function() {
     MyPackage.a = "a"
@@ -36,6 +38,7 @@ class BundleProcessorTest < Sprockets::Export::TestCase
     assert_equal <<-JS,  @env["package-noglobal.js"].to_s
 (function() {
   var context = {};
+
   (function() {
     this.MyPackage = {
       version: 1
@@ -64,11 +67,13 @@ class BundleProcessorTest < Sprockets::Export::TestCase
 head();
 
 (function() {
+  var context = this;
+
   (function() {
     this.Foo = function() {};
-  }).call(this);
+  }).call(context);
 
-  var Foo = this.Foo;
+  var Foo = context.Foo;
 
   (function() {
     new Foo();
