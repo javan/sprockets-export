@@ -33,10 +33,8 @@ module Sprockets::Export::BundleProcessor
     end
 
     def create_flags(string = "")
-      OpenStruct.new.tap do |flags|
-        string.split.each do |flag|
-          flags[flag] = true
-        end
-      end
+      flags = {}
+      string.split.each { |flag| flags[flag] = true }
+      OpenStruct.new(flags)
     end
 end
