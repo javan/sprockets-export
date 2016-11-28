@@ -1,5 +1,6 @@
 require "pathname"
 
+require "sprockets"
 require "sprockets/export/version"
 require "sprockets/export/store"
 require "sprockets/export/directive_processor"
